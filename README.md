@@ -1,4 +1,4 @@
-setup for an ESP8266 to control arduino behavior and circuit accordingly
+driver setup for an ESP8266 to control arduino behavior and circuit accordingly
 
 Change the html in the "index.h" file to add more buttons according to functionality, using the sendData function and assinging the value for function in the .ino file.
 
