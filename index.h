@@ -106,6 +106,28 @@ input:checked + .slider:before {
 
   </div>
   <script>
+    const addr = "172.217.28.100";
+    function check_cred(user, pass) {
+        let req = "http://"+addr+":5000/get-user/"+user+"?pw="+pass;
+        console.log(req);
+        fetch(req)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }else{
+            return response.json();
+          }
+        })
+        .then(data=>{
+            testy(data["login"]);
+        })
+
+    }
+
+    function get_response(user, pass) {
+        console.log(check_cred(user, pass))
+    }
+
 
     function sendData(pos) {
     var xhttp = new XMLHttpRequest();
@@ -132,15 +154,8 @@ input:checked + .slider:before {
         }
     }
 
-
-    document.getElementById('switch').style.display = 'none';
-    function checkCredentials(event) {
-      event.preventDefault();
-
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-
-      if (username === 'admin' && password === 'password') {
+    function testy(val){
+        if (val==1) {
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('switch').style.display = 'block';
         document.getElementById('errorMessage').innerText = 'Login Successful!';
@@ -148,6 +163,27 @@ input:checked + .slider:before {
       } else {
         document.getElementById('errorMessage').innerText = 'Invalid username or password';
       }
+    }
+
+    document.getElementById('switch').style.display = 'none';
+    function checkCredentials(event) {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+        
+      check_cred(username, password);
+
+    //   console.log(password)
+    //   console.log(get_response(username, password));
+    //   if (check_cred(username, password)==1) {
+    //     document.getElementById('loginForm').style.display = 'none';
+    //     document.getElementById('switch').style.display = 'block';
+    //     document.getElementById('errorMessage').innerText = 'Login Successful!';
+
+    //   } else {
+    //     document.getElementById('errorMessage').innerText = 'Invalid username or password';
+    //   }
     }
   </script>
 </body>
