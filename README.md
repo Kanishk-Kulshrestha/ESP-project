@@ -6,5 +6,7 @@ Just download the setup file and run it (no need to download the whole repo) [th
 PREREQUISITE
 ============
 Python 3 with pip
+
 mySQL
-ESP-8266 (duh)
+
+ESP-8266
