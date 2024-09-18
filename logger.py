@@ -6,8 +6,7 @@ from tabulate import tabulate
 os.system('cls')
 dirty = 0
 
-# ENV_VAR = bcrypt.gensalt()
-ENV_VAR = b'$2b$12$LZCJc8g4SwyqTvBVbfldjO'
+ENV_VAR = (os.environ['HASH_SALT']).encode('utf-8')
 
 db = mysql.connector.connect(
 	host = "localhost",
