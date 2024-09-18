@@ -1,11 +1,6 @@
 @echo off
 
-set repo = "https://github.com/Kanishk-Kulshrestha/ESP-project"
-
-set zip = repo.zip
-
-curl -L "%repo%/archive/refs/heads/main.zip" -o %zip%
-
+curl -L "https://github.com/Kanishk-Kulshrestha/ESP-project/archive/refs/heads/master.zip" -o project.zip
 if %errorlevel% equ 0 (
 	echo Repository downloaded successfully.
 ) else (
@@ -13,7 +8,7 @@ if %errorlevel% equ 0 (
 	exit /b 1
 )
 
-powershell -Command "Expand-Archive -Path %zip%"
+powershell -Command "Expand-Archive -Path project.zip"
 
 if %errorlevel% equ 0 (
 	echo Repository extracted successfully.
@@ -22,7 +17,50 @@ if %errorlevel% equ 0 (
 	exit /b 1
 )
 
-del %zip%
+del project.zip
 
-echo Done.
-pause
+pip install "mysql-connector-python"
+
+if %errorlevel% equ 0 (
+	echo Library downloaded successfully.
+) else (
+	echo Unable to download library.
+	exit /b 1
+)
+
+pip install flask
+
+if %errorlevel% equ 0 (
+	echo Library downloaded successfully.
+) else (
+	echo Unable to download library.
+	exit /b 1
+)
+
+pip install flask-cors
+
+if %errorlevel% equ 0 (
+	echo Library downloaded successfully.
+) else (
+	echo Unable to download library.
+	exit /b 1
+)
+
+pip install bcrypt
+
+if %errorlevel% equ 0 (
+	echo Library downloaded successfully.
+) else (
+	echo Unable to download library.
+	exit /b 1
+)
+
+cd project
+cd ESP-project-main
+
+setx HASH_SALT $2b$12$LZCJc8g4SwyqTvBVbfldjO
+
+python db-setup.py
+del db-setup.py
+python logger.py
+del setup.bat
