@@ -6,9 +6,6 @@ import os
 
 ENV_VAR = (os.environ['HASH_SALT']).encode('utf-8')
 
-print(ENV_VAR)
-exit()
-
 
 app = Flask(__name__)
 CORS(app)
