@@ -2,8 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import mysql.connector
 import bcrypt
+import os
 
-ENV_VAR = b'$2b$12$LZCJc8g4SwyqTvBVbfldjO'
+ENV_VAR = (os.environ['HASH_SALT']).encode('utf-8')
+
+print(ENV_VAR)
+exit()
+
 
 app = Flask(__name__)
 CORS(app)
@@ -13,7 +18,7 @@ db = mysql.connector.connect(
 	host = "localhost",
 	user = "root",
 	passwd = "razk",
-	database = "USERS"
+	database = "esp_8266_door"
 	)
 
 cursor = db.cursor()
